@@ -1,6 +1,6 @@
 # Global settings applied to the whole site
 [build]
-  publish = "dist/"
+  publish = "dist/radio_referbish_FE"
   command = "npm run build:prod"
 
 # Redirects
