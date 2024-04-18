@@ -1,7 +1,6 @@
 # Global settings applied to the whole site
 [build]
-  base = "radio_referbish_FE"
-  publish = "dist/browser"
+  publish = "dist"
   command = "npm run build:prod"
 
 # Redirects
@@ -9,3 +8,4 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
