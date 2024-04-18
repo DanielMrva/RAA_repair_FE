@@ -10,6 +10,8 @@ import { TableSearchParams } from '@app/graphql/schemas';
   styleUrls: ['./user-table.component.css']
 })
 export class UserTableComponent implements OnInit {
+
+  dataSource
   
   @Input() searchParams: TableSearchParams = {
     queryType: '',
@@ -23,9 +25,11 @@ export class UserTableComponent implements OnInit {
     'accessLevel'
   ]
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {
+    this.dataSource = new UserDataSource(this.userService);
 
-  dataSource = new UserDataSource(this.userService);
+  }
+
 
   ngOnInit(): void {
     switch (this.searchParams.queryType) {

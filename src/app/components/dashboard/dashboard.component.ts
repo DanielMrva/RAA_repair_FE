@@ -11,7 +11,7 @@ import { selectAccessLevel } from '@app/_store/_auth-store/auth.selectors';
 })
 export class DashboardComponent {
 
-  userAccessLevel$ = this.store.select(selectAccessLevel);
+  userAccessLevel$
 
   ADMIN_ACCESS = ACCESS_LEVEL_ADMIN;
   USER_ACCESS = ACCESS_LEVEL_USER;
@@ -19,6 +19,10 @@ export class DashboardComponent {
 
   constructor(
     private store: Store<AppState>
-  ) {}
+  ) {
+
+    this.userAccessLevel$ = this.store.select(selectAccessLevel);
+
+  }
 
 }

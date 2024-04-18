@@ -11,6 +11,8 @@ import { TableSearchParams } from '@app/graphql/schemas';
 })
 export class RepairTableComponent implements OnInit {
 
+  dataSource
+
   @Input() searchParams: TableSearchParams = {
     queryType: '',
     queryParams: ''
@@ -20,9 +22,11 @@ export class RepairTableComponent implements OnInit {
 
   ]
 
-  dataSource = new RepairDataSource(this.repairService);
 
-  constructor(private repairService: RepairService) {}
+  constructor(private repairService: RepairService) {
+    this.dataSource = new RepairDataSource(this.repairService);
+
+  }
 
 
   ngOnInit(): void {

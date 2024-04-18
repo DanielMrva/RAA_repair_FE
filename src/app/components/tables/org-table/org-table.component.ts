@@ -10,6 +10,8 @@ import { TableSearchParams } from '@app/graphql/schemas';
 })
 export class OrgTableComponent implements OnInit {
 
+  dataSource
+
   @Input() searchParams: TableSearchParams = {
     queryType: '',
     queryParams: '',
@@ -21,9 +23,11 @@ export class OrgTableComponent implements OnInit {
     'users'
   ];
 
-  dataSource = new OrganizationDataSource(this.orgService);
 
-  constructor(private orgService: OrganizationService) {}
+  constructor(private orgService: OrganizationService) {
+    this.dataSource = new OrganizationDataSource(this.orgService);
+
+  }
 
   ngOnInit(): void {
       switch (this.searchParams.queryType) {

@@ -13,7 +13,7 @@ import { TableSearchParams } from '@app/graphql/schemas';
 })
 export class RadioTableComponent implements OnInit, OnChanges{
 
-
+  dataSource
 
   @Input() searchParams: TableSearchParams = {
     queryType: '',
@@ -38,10 +38,11 @@ export class RadioTableComponent implements OnInit, OnChanges{
     'radioType'
   ];
 
-  dataSource = new RadioDataSource(this.radioService);
 
   constructor(private radioService: RadioService) {
     console.log(`RT constructor`)
+    this.dataSource = new RadioDataSource(this.radioService);
+
   }
 
   private loadData() {
