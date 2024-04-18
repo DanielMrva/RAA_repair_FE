@@ -1,6 +1,6 @@
 # Global settings applied to the whole site
 [build]
-  base = "radio_referbish_FE
+  base = "radio_referbish_FE"
   publish = "dist/browser"
   command = "npm run build:prod"
 
