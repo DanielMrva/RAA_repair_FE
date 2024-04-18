@@ -1,0 +1,170 @@
+<div class="container">
+    <div class="row">
+
+        <h2 class="col-12 text-center">Add Radio</h2>
+
+        <form [formGroup]="adminRadioForm" (ngSubmit)="onSubmit()" class="row">
+
+            <section class="row" id="timeline-section">
+
+                <h4 class="col-12 text-center">Timeline</h4>
+
+                <mat-form-field class="form-group col-4">
+                    <mat-label>Date Purchased</mat-label>
+                    <input matInput [matDatepicker]="datePurchasedPicker" formControlName="datePurchased">
+                    <mat-datepicker-toggle matSuffix [for]="datePurchasedPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datePurchasedPicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="form-group col-4">
+                    <mat-label>Date Entered</mat-label>
+                    <input matInput [matDatepicker]="dateEnteredPicker" formControlName="dateEntered">
+                    <mat-datepicker-toggle matSuffix [for]="dateEnteredPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dateEnteredPicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="form-group col-4">
+                    <mat-label>Warranty Experation</mat-label>
+                    <input matInput [matDatepicker]="warrantyPicker" formControlName="warranty">
+                    <mat-datepicker-toggle matSuffix [for]="warrantyPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #warrantyPicker></mat-datepicker>
+                </mat-form-field>
+
+            </section>
+
+            <section class="row" id="tracking">
+
+                <h4 class="col-12 text-center">Tracking</h4>
+
+                <mat-form-field class="form-group col-4">
+                    <mat-label for="orgName">
+                        Organization:
+                    </mat-label>
+                    <input  type="text"
+                            placeholder="Organization"
+                            aria-label="Organizaiton"
+                            matInput
+                            [formControl]="adminRadioForm.controls.orgName"
+                            [matAutocomplete]="orgAuto"
+                    >
+                    <mat-autocomplete 
+                    autoActiveFirstOption
+                    #orgAuto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOrgNames$ | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+
+                    </mat-autocomplete>
+
+                </mat-form-field>
+
+                <mat-form-field class="form-group col-4">
+                    <mat-label for="locationName">
+                        Location:
+                    </mat-label>
+                    <input  type="text"
+                            placeholder="Location"
+                            aria-label="Location"
+                            matInput
+                            [formControl]="adminRadioForm.controls.locationName"
+                            [matAutocomplete]="locAuto"
+                    >
+                    <mat-autocomplete 
+                    autoActiveFirstOption
+                    #locAuto="matAutocomplete">
+                        <mat-option *ngFor="let locOption of filteredLocNames$ | async" [value]="locOption">
+                            {{locOption}}
+                        </mat-option>
+
+                    </mat-autocomplete>
+
+                </mat-form-field>
+
+                <!-- <div class="form-group col-4">
+                    <label for="locationName">Location:</label>
+                    <input type="text" id="locationName" formControlName="locationName" class="form-control">
+                </div> -->
+
+                <div class="form-group col-4">
+                    <label for="inventoryNumber">Inventory Number:</label>
+                    <input type="text" id="inventoryNumber" formControlName="inventoryNumber" class="form-control"
+                        [class.invalid]="fieldValidCheck('inventoryNumber')">
+                </div>
+
+            </section>
+
+            <section class="row" id="radio-secton">
+
+                <h4 class="col-12 text-center">Radio Details</h4>
+
+                <div class="form-group col-4">
+                    <label for="make">Make:</label>
+                    <input type="text" id="make" formControlName="make" class="form-control"
+                        [class.invalid]="fieldValidCheck('make')">
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="model">Model:</label>
+                    <input type="text" id="model" formControlName="model" class="form-control"
+                        [class.invalid]="fieldValidCheck('model')">
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="serialNumber">Serial Number:</label>
+                    <input type="text" id="serialNumber" formControlName="serialNumber" class="form-control"
+                        [class.invalid]="fieldValidCheck('serialNumber')">
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="radioType">Radio Type:</label>
+                    <mat-radio-group formControlName="radioType">
+                        <mat-radio-button value="mobile">Mobile</mat-radio-button>
+                        <mat-radio-button value="static">Static</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="form-group col-4">
+                    <label>Refurb:</label>
+                    <mat-radio-group formControlName="refurb">
+                        <mat-radio-button [value]="true">Yes</mat-radio-button>
+                        <mat-radio-button [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="progChannels">Programmed Channels:</label>
+                    <input type="text" id="progChannels" formControlName="progChannels" class="form-control">
+                </div>
+
+            </section>
+
+            <section class="row" id="notes-section">
+                <h4 class="col-12 text-center">Notes: </h4>
+
+                <div class="form-group col-12">
+                    <label for="notes">Notes:</label>
+                    <div formArrayName="notes">
+                        <div *ngFor="let note of notesArray.controls; let i = index" class="input-group mb-2">
+                            <input type="text" [formControlName]="i" class="form-control">
+                            <div class="input-group-append">
+                                <button *ngIf="notesArray.length > 1" type="button" class="btn btn-danger"
+                                    (click)="removeNotes(i)">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="addNotes()"><i
+                                class="bi bi-plus-circle"></i></button>
+                    </div>
+                </div>
+
+            </section>
+
+            <div class="col-12 d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+
+        </form>
+    </div>
+</div>

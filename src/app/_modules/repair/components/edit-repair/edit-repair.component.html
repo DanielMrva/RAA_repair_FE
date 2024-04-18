@@ -1,0 +1,9 @@
+<ng-container *ngIf="userAccessLevel$ | async as accessLevel">
+
+    <ng-container [ngSwitch]="accessLevel">
+
+        <app-admin-edit-repair *ngSwitchCase="ADMIN_ACCESS"></app-admin-edit-repair>
+
+    </ng-container>
+
+</ng-container>
