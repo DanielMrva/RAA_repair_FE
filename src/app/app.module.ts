@@ -47,6 +47,7 @@ import { TechDashboardComponent } from '@app/components/dashboard/dashboards/tec
 import { ToastComponent } from '@app/components/toast/toast.component';
 import { AuthEffects } from '@app/_store/_auth-store/auth.effects';
 import { LocationMismatchDialogComponent } from '@app/_components/utilComponents/location-mismatch-dialog/location-mismatch-dialog.component';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -95,7 +96,7 @@ import { LocationMismatchDialogComponent } from '@app/_components/utilComponents
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode()})
         
     ],
-    providers: [ AuthService ],
+    providers: [ AuthService, {provide: APP_BASE_HREF, useValue: '/'}],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }
