@@ -12,19 +12,17 @@ import { selectIsAuthenticated, selectUserName } from '@app/_store/_auth-store/a
 })
 export class HomeComponent {
 
-  userName$
-  isAuthenticated$
-
   loading = false;
   // user: User;
+
+  userName$ = this.store.select(selectUserName);
+  isAuthenticated$ = this.store.select(selectIsAuthenticated);
 
   constructor(
     private authService: AuthService,
     private store: Store<AppState>
   ) {
-    this.userName$ = this.store.select(selectUserName);
-    this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
-  
-    }
+    // this.user = <User>this.authService.loggedUser$.value;
+  }
 
 }
