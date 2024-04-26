@@ -17,7 +17,6 @@ export class LocationMismatchDialogComponent {
 
   confirmUpdate() {
 
-    console.log('LMD.confirmUpdate()')
 
     const updates: UpdateRadioFields = {
       locationName: this.newLocation
@@ -28,13 +27,11 @@ export class LocationMismatchDialogComponent {
   }
 
   submitWithoutUpdate() {
-    console.log('LMD.submitWithoutUpdate()')
 
     this.activeModal.close('submit');
   }
 
   cancel() {
-    console.log('LMD.cancel()')
 
     this.activeModal.dismiss('cancel');
   }

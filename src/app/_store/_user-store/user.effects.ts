@@ -161,10 +161,9 @@ export class UserEffects {
             ofType(loginUser),
             switchMap(({ email, password }) =>
                 this.userService.loginUser(email, password).pipe(
-                    tap(response => console.log('Login response:', response)),
+                    tap(response => ('Login response:', response)),
                     map(({ data }) => {
                         const login = data?.login;
-                        console.log(login?.user);
                         return loginUserSuccess({ login })
                     }),
                     catchError((error) => of(loginUserFailure({ error })))
@@ -172,35 +171,6 @@ export class UserEffects {
             )
         )
     );
-
-
-
-
-
-
-
-    // loginUserSuccess2$ = createEffect(() =>
-    //     this.actions$.pipe(
-    //         ofType(loginUserSuccess),
-    //         map(({ loginResults }) => {
-    //             if (loginResults) {
-
-    //                 console.log(loginResults);
-    //                 const { username, orgName, accessLevel } = loginResults.user;
-
-    //                 this.toastService.show(`Welcome ${loginResults.user.username} !`, {
-    //                     classname: 'bg-success text-light',
-    //                     delay: 3000
-    //                 });
-
-    //                 return setAuthInfo({ username, orgName, accessLevel })
-    //             } else {
-    //                 console.log('no login results apparently?...')
-    //                 return clearAuthInfo();
-    //             }
-    //         })
-    //     )
-    // );
 
     loginUserSuccess$ = createEffect(() =>
         this.actions$.pipe(
@@ -215,10 +185,8 @@ export class UserEffects {
                     }),
 
                     this.router.navigate(['/'])
-                    console.log('Login User Success dispatching SET AUTH INFO')
                     return setAuthInfo({ username, orgName, accessLevel });
                 } else {
-                    console.log('no login results or user information available.');
                     return clearAuthInfo();
                 }
             })
