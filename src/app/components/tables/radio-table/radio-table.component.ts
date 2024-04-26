@@ -40,16 +40,13 @@ export class RadioTableComponent implements OnInit, OnChanges{
 
   dataSource = new RadioDataSource(this.radioService);
 
-  constructor(private radioService: RadioService) {
-    console.log(`RT constructor`)
-  }
+  constructor(private radioService: RadioService) {  }
 
   private loadData() {
 
     this.dataSource = new RadioDataSource(this.radioService);
 
 
-    console.log('r-t loadData')
     switch (this.searchParams.queryType) {
       case 'orgRadios':
         this.dataSource.loadOrgRadios(this.searchParams.queryParams);
@@ -61,13 +58,11 @@ export class RadioTableComponent implements OnInit, OnChanges{
 
   ngOnInit(): void {
 
-    console.log('radio table init')
 
     this.dataSource = new RadioDataSource(this.radioService);
 
     switch (this.searchParams.queryType) {
       case 'orgRadios': {
-        console.log(`r-t switch: ${this.searchParams.queryParams}`)
         this.dataSource.loadOrgRadios(this.searchParams.queryParams);
       }
         break;
@@ -77,10 +72,7 @@ export class RadioTableComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges called')
-    // Check if the 'searchParams' input property has changed
     if (changes['searchParams'] && !changes['searchParams'].firstChange) {
-      // Handle the changes here
       this.loadData();
     }
   }

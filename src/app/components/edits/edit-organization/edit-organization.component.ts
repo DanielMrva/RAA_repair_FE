@@ -28,7 +28,6 @@ export class EditOrganizationComponent implements OnInit{
   loadOrg(id: string): void {
     this.orgService.querySingleOrg(id)
     .subscribe(( { data }) => {
-      console.log(data)
       this.org = data.org;
       this.populateForm();
       this.loadingOrg = false;

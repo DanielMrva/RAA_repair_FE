@@ -69,8 +69,6 @@ export class AdminRadioComponent implements OnInit {
 
   onSubmit() {
     
-    console.log(this.adminRadioForm.value)
-
     const orgName = this.adminRadioForm.value.orgName ?? '';
     const location = this.adminRadioForm.value.location ?? '';
     const datePurchased = this.adminRadioForm.value.datePurchased ?? '';
