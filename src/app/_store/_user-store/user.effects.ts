@@ -161,7 +161,7 @@ export class UserEffects {
             ofType(loginUser),
             switchMap(({ email, password }) =>
                 this.userService.loginUser(email, password).pipe(
-                    tap(response => ('Login response:', response)),
+                    tap(response => console.log('Login response:', response)),
                     map(({ data }) => {
                         const login = data?.login;
                         return loginUserSuccess({ login })
