@@ -21,10 +21,13 @@ export class AdminNavComponent {
 
   navigateOrgRadios() {
     const orgName = this.orgRadiosForm.value.orgName;
+    console.log(`orgName: ${orgName}`);
 
     if (orgName) {
+      console.log(`Navigating to: /org-radio/${orgName}`);
       this.router.navigate(['/org-radio', orgName]);
     } else {
+      console.log(`Navigating to: /org-radio/raa`);
       this.router.navigate(['/org-radio', 'raa']);
     }
   }

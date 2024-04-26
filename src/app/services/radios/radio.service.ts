@@ -10,11 +10,11 @@ export class RadioService {
 
   constructor(private apollo: Apollo) { }
 
-  querySerialRadio(serialNumber: string) {
-    return this.apollo.watchQuery<{radio: Radio}> ({
+  querySerialRadio(serialNumber: string, model: string) {
+    return this.apollo.watchQuery<{serialRadio: Radio}> ({
       query: QUERY_SERIALRADIO,
       variables: {
-        serialNumber
+        serialNumber, model
       }
     });
   }
@@ -29,12 +29,14 @@ export class RadioService {
   }
 
   allRadios() {
+    console.log('all radios in service')
     return this.apollo.watchQuery<{radios: Radio[]}>({
       query: ALL_RADIOS
     });
   }
 
   orgRadios(orgName: string) {
+    console.log('org radios in service')
     return this.apollo.watchQuery<{orgRadios: Radio[]}>({
       query: ORG_RADIOS,
       variables: {
