@@ -22,8 +22,10 @@ export class LocationEffects {
         this.actions$.pipe(
             ofType(LocationActions.loadOneLocation),
             mergeMap(({ locationId }) => {
+                console.log('Dispatched loadOneLocation action with ID: ', locationId);
                 return this.locationService.querySingleLocation(locationId).valueChanges.pipe(
                     map(({ data }) => {
+                        console.log('Loaded oneLocation data: ', data.location);
                         return LocationActions.loadOneLocationSuccess({ location: data.location });
                     }),
                     catchError((error) => {
@@ -39,8 +41,10 @@ export class LocationEffects {
     this.actions$.pipe(
         ofType(LocationActions.loadLocationByName),
         mergeMap(({ locationName }) => {
+            console.log('Dispatched loadLocationByName action with Name: ', locationName);
             return this.locationService.queryLocationByName(locationName).valueChanges.pipe(
                 map(({ data }) => {
+                    console.log('Loaded Location by Name data: ', data.locationByName);
                     return LocationActions.loadLocationByNameSuccess({ location: data.locationByName });
                 }),
                 catchError((error) => {
@@ -127,7 +131,7 @@ export class LocationEffects {
                 this.toastService.show('Location added successfully!', {
                     delay: 3000
                 }),
-                    this.router.navigate(['one-Location', location?._id])
+                    this.router.navigate(['one-location', location?._id])
             })
         ),
         { dispatch: false }

@@ -344,6 +344,9 @@ export const ADD_LOCATION = gql`
             phone
             contactEmail
             primaryContact
+            radios {
+                _id
+            }
         }
     }
 `
