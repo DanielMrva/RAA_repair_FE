@@ -140,10 +140,6 @@ export class EditRadioComponent implements OnInit, OnDestroy {
       
   };
 
-
-
-
-
   editRadioForm = new FormGroup({
     orgName: new FormControl<string>(''),
     locationName: new FormControl<string>(''),
@@ -158,9 +154,8 @@ export class EditRadioComponent implements OnInit, OnDestroy {
     warranty: new FormControl<Date>(new Date()),
     refurb: new FormControl<boolean>(false, { nonNullable: true }),
     radioType: new FormControl<string>(''),
-  })
-
-
+    otherType: new FormControl<string>('')
+  });
 
   get notesArray(): FormArray {
     return this.editRadioForm.get('notes') as FormArray;
@@ -177,6 +172,16 @@ export class EditRadioComponent implements OnInit, OnDestroy {
 
       this.oneRadio$.subscribe((radio: Radio | null) => {
         if (radio) {
+
+          const predefinedTypes = ['mobile', 'handheld', 'base station', 'other'];
+          let radioType = radio.radioType;
+          let otherType = '';
+
+          if (!predefinedTypes.includes(radio.radioType.toLowerCase())) {
+            radioType = 'other';
+            otherType = radio.radioType;
+          }
+
         this.editRadioForm.patchValue({
             orgName: radio.orgName,
             locationName: radio.locationName,
@@ -189,7 +194,8 @@ export class EditRadioComponent implements OnInit, OnDestroy {
             serialNumber: radio.serialNumber,
             warranty: new Date(parseInt(radio.warranty)),
             refurb: radio.refurb,
-            radioType: radio.radioType
+            radioType: radioType,
+            otherType: otherType
           });
   
           radio.notes.forEach(note => {
@@ -231,22 +237,29 @@ export class EditRadioComponent implements OnInit, OnDestroy {
 
     )
 
+    let radioType
+    if (this.editRadioForm.value.radioType === "other") {
+      radioType = this.editRadioForm.value.otherType ?? '';
+    } else {
+      radioType = this.editRadioForm.value.radioType ?? '';
+    }
+
     return {
 
-      
-    orgName: this.editRadioForm.value.orgName ?? '',
-    locationName: this.editRadioForm.value.locationName ?? '',
-    datePurchased: this.editRadioForm.value.datePurchased ?? new Date(),
-    dateEntered: this.editRadioForm.value.dateEntered ?? new Date(),
-    inventoryNumber: this.editRadioForm.value.inventoryNumber ?? '',
-    make: this.editRadioForm.value.make ?? '',
-    model: this.editRadioForm.value.model ?? '',
-    progChannels: this.editRadioForm.value.progChannels ?? '',
-    notes: Array.isArray(this.editRadioForm.value.notes) ? this.editRadioForm.value.notes.map(note => note ?? '') : [''],    
-    serialNumber: this.editRadioForm.value.serialNumber ?? '',
-    warranty: this.editRadioForm.value.warranty ?? new Date(),
-    refurb: this.editRadioForm.value.refurb ?? false,
-    radioType: this.editRadioForm.value.radioType ?? '',
+
+      orgName: this.editRadioForm.value.orgName ?? '',
+      locationName: this.editRadioForm.value.locationName ?? '',
+      datePurchased: this.editRadioForm.value.datePurchased ?? new Date(),
+      dateEntered: this.editRadioForm.value.dateEntered ?? new Date(),
+      inventoryNumber: this.editRadioForm.value.inventoryNumber ?? '',
+      make: this.editRadioForm.value.make ?? '',
+      model: this.editRadioForm.value.model ?? '',
+      progChannels: this.editRadioForm.value.progChannels ?? '',
+      notes: Array.isArray(this.editRadioForm.value.notes) ? this.editRadioForm.value.notes.map(note => note ?? '') : [''],
+      serialNumber: this.editRadioForm.value.serialNumber ?? '',
+      warranty: this.editRadioForm.value.warranty ?? new Date(),
+      refurb: this.editRadioForm.value.refurb ?? false,
+      radioType: radioType,
 
     }
 
