@@ -122,6 +122,7 @@ export class AddLocationComponent implements OnInit, OnDestroy {
 
   onSubmit() {
 
+
     const locationName = this.locationForm.value.locationName ?? '';
     const orgName = this.locationForm.value.orgName ?? '';
     const street = this.locationForm.value.street ?? '';
@@ -159,3 +160,4 @@ export class AddLocationComponent implements OnInit, OnDestroy {
   };
 
 }
+
