@@ -283,7 +283,7 @@ export const EDIT_ORG = gql`
             users {
                 _id
             }
-            loactions {
+            locations {
                 _id
             }
         }
