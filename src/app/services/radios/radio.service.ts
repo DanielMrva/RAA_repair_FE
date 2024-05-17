@@ -31,11 +31,11 @@ export class RadioService {
   querySingleRadio(radioID: string) {
     return this.apollo.watchQuery<{radio: Radio}>({
       query: QUERY_SINGLERADIO,
-      variables: {
-        radioID
-      }
-    })
+      variables: { radioID },
+      fetchPolicy: 'network-only'
+    });
   }
+  
 
   allRadios() {
     return this.apollo.watchQuery<{allRadios: Radio[]}>({
