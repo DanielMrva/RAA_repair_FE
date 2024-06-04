@@ -11,6 +11,9 @@ import {
     loadUsers,
     loadUsersSuccess,
     loadUsersFailure,
+    loadOrgUsers,
+    loadOrgUsersFailure,
+    loadOrgUsersSuccess,
     loadOneUser,
     loadOneUserSuccess,
     loadOneUserFailure,
@@ -44,11 +47,26 @@ export class UserEffects {
             ofType(loadUsers),
             switchMap(() =>
                 // call 
-                from(this.userService.queryUsers()).pipe(
+                from(this.userService.queryUsers().valueChanges).pipe(
                     // Take the returned data from ApolloQueryResult and return a new success action containing the users
                     map(({ data }) => loadUsersSuccess({ users: data.users })),
                     // Or if there are errors, return a new failure action with the error
                     catchError((error) => of(loadUsersFailure({ error })))
+                )
+            )
+        )
+    );
+
+    loadOrgUsers$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(loadOrgUsers),
+            switchMap(({orgName}) =>
+                // call 
+                from(this.userService.queryOrgUsers(orgName).valueChanges).pipe(
+                    // Take the returned data from ApolloQueryResult and return a new success action containing the users
+                    map(({ data }) => loadOrgUsersSuccess({ users: data.orgUsers })),
+                    // Or if there are errors, return a new failure action with the error
+                    catchError((error) => of(loadOrgUsersFailure({ error })))
                 )
             )
         )
@@ -164,6 +182,7 @@ export class UserEffects {
                     tap(response => console.log('Login response:', response)),
                     map(({ data }) => {
                         const login = data?.login;
+                        console.log(login?.user);
                         return loginUserSuccess({ login })
                     }),
                     catchError((error) => of(loginUserFailure({ error })))
@@ -185,8 +204,10 @@ export class UserEffects {
                     }),
 
                     this.router.navigate(['/'])
+                    console.log('Login User Success dispatching SET AUTH INFO')
                     return setAuthInfo({ username, orgName, accessLevel });
                 } else {
+                    console.log('no login results or user information available.');
                     return clearAuthInfo();
                 }
             })

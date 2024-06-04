@@ -130,6 +130,8 @@ export class AddLocationComponent implements OnInit, OnDestroy {
 
   onSubmit() {
 
+    console.log(this.locationForm.value);
+
     const locationName = this.locationForm.value.locationName ?? '';
     const orgName = this.locationForm.value.orgName ?? '';
     const street = this.locationForm.value.street ?? '';

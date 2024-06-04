@@ -26,6 +26,7 @@ export class UserService {
 
   loginUser(email: string, password: string) {
 
+    console.log(`Login User in Service: ${email}, ${password}`)
     return this.apollo.mutate<{login: LoginResults}>({
       mutation: LOGIN_USER,
       variables: {
@@ -45,13 +46,13 @@ export class UserService {
   }
 
   queryUsers() {
-    return this.apollo.query<{users: User[]}> ({
+    return this.apollo.watchQuery<{users: User[]}> ({
       query: QUERY_USERS
     })
   }
 
   queryOrgUsers(orgName: string) {
-    return this.apollo.query<{orgUsers: User[]}> ({
+    return this.apollo.watchQuery<{orgUsers: User[]}> ({
       query: ORG_USERS,
       variables: {
         orgName

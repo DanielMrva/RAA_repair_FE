@@ -44,6 +44,7 @@ export class AuthEffects {
         this.actions$.pipe(
             ofType(AuthActions.setAuthInfo),
             map((AuthInfo) => {
+                console.log(AuthInfo)
                 localStorage.setItem('user', JSON.stringify(AuthInfo));
             })
         ),

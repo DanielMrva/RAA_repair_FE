@@ -31,19 +31,21 @@ export class RadioService {
   querySingleRadio(radioID: string) {
     return this.apollo.watchQuery<{radio: Radio}>({
       query: QUERY_SINGLERADIO,
-      variables: { radioID },
-      fetchPolicy: 'network-only'
-    });
+      variables: {
+        radioID
+      }
+    })
   }
-  
 
   allRadios() {
+    console.log('all radios in service')
     return this.apollo.watchQuery<{allRadios: Radio[]}>({
       query: ALL_RADIOS
     });
   }
 
   orgRadios(orgName: string) {
+    console.log('org radios in service')
     return this.apollo.watchQuery<{orgRadios: Radio[]}>({
       query: ORG_RADIOS,
       variables: {

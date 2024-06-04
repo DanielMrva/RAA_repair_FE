@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as LocationActions from "./location.actions";
+import { loadAllOrgs } from "../_org-store/org.actions";
 import { Router } from "@angular/router";
 import { LocationService } from "@app/services/location/location.service";
 import { ToastService } from "@app/services/toast/toast.service";
 import { of, from } from "rxjs";
-import { switchMap, map, catchError, mergeMap } from "rxjs/operators";
+import { switchMap, map, catchError, mergeMap, tap } from "rxjs/operators";
 import { Store } from "@ngrx/store";
 import { AppState } from "../app.state";
 
@@ -22,8 +23,10 @@ export class LocationEffects {
         this.actions$.pipe(
             ofType(LocationActions.loadOneLocation),
             mergeMap(({ locationId }) => {
+                console.log('Dispatched loadOneLocation action with ID: ', locationId);
                 return this.locationService.querySingleLocation(locationId).valueChanges.pipe(
                     map(({ data }) => {
+                        console.log('Loaded oneLocation data: ', data.location);
                         return LocationActions.loadOneLocationSuccess({ location: data.location });
                     }),
                     catchError((error) => {
@@ -39,8 +42,10 @@ export class LocationEffects {
     this.actions$.pipe(
         ofType(LocationActions.loadLocationByName),
         mergeMap(({ locationName }) => {
+            console.log('Dispatched loadLocationByName action with Name: ', locationName);
             return this.locationService.queryLocationByName(locationName).valueChanges.pipe(
                 map(({ data }) => {
+                    console.log('Loaded Location by Name data: ', data.locationByName);
                     return LocationActions.loadLocationByNameSuccess({ location: data.locationByName });
                 }),
                 catchError((error) => {
@@ -123,14 +128,16 @@ export class LocationEffects {
     addLocationSuccess$ = createEffect(() =>
         this.actions$.pipe(
             ofType(LocationActions.addLocationSuccess),
-            map(({ location }) => {
-                this.toastService.show('Location added successfully!', {
-                    delay: 3000
-                }),
-                    this.router.navigate(['one-location', location?._id])
-            })
+            tap(({ location }) => {
+                this.toastService.show('Location added successfully!', { delay: 3000 });
+                this.router.navigate(['one-location', location?._id]);
+            }),
+            switchMap(() => [
+                loadAllOrgs(),  // Refetch all orgs to ensure data freshness
+            ])
         ),
-        { dispatch: false }
+        { dispatch: true }
+
     );
 
     addLocationFailure$ = createEffect(() =>
@@ -165,14 +172,15 @@ export class LocationEffects {
     editLocationSuccess$ = createEffect(() =>
         this.actions$.pipe(
             ofType(LocationActions.editLocationSuccess),
-            map(({ location }) => {
-                this.toastService.show('Location edited successfully!', {
-                    delay: 3000
-                }),
-                    this.router.navigate(['one-location', location?._id])
-            })
+            tap(({ location }) => {
+                this.toastService.show('Location edited successfully!', { delay: 3000 });
+                this.router.navigate(['one-locaiton', location?._id]);
+            }),
+            switchMap(() => [
+                loadAllOrgs(),  // Refetch all orgs to ensure data freshness
+            ])
         ),
-        { dispatch: false }
+        { dispatch: true }
     );
 
     editLocationFailure$ = createEffect(() =>

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import * as RepairActions from "./repair.actions";
 import * as RadioActions from "@app/_store/_radio-store/radio.actions"
+import * as RepairActions from "./repair.actions";
 import { loadOneRadio } from "../_radio-store/radio.actions";
 import { loadLocationByName } from "../_location-store/location.actions";
 import { Router } from "@angular/router";
@@ -57,6 +57,19 @@ export class RepairEffects {
         )
     );
 
+    loadOrgRepairs$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(RepairActions.loadOrgRepairs),
+            switchMap(({ orgName }) => 
+                from(this.repairService.orgRepairs(orgName)).pipe(
+                    map(({ data }) => RepairActions.loadOrgRepairsSuccess({ repairs: data.orgRepairs})),
+
+                    catchError((error) => of(RepairActions.loadOrgRepairsFailure({ error})))
+                )
+            )
+        )
+    );
+
     loadAllRepairs$ = createEffect(() =>
         this.actions$.pipe(
             ofType(RepairActions.loadAllRepairs),
@@ -103,7 +116,6 @@ export class RepairEffects {
             })
         )
     );
-
 
     addRepairFailure$ = createEffect(() =>
         this.actions$.pipe(
