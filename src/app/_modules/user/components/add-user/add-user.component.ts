@@ -91,6 +91,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   onSubmit() {
 
+    console.log(this.userForm.value);
+
     const username = this.userForm.value.username ?? '';
     const email = this.userForm.value.email ?? '';
     const password = this.userForm.value.password ?? '';

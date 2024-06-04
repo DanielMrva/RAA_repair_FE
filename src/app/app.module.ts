@@ -10,9 +10,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-// import { MatRadioModule } from '@angular/material/radio';
-// import { MatSelectModule } from '@angular/material/select';
-// import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -23,7 +21,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from '@app/app-routing.module';
 
 import { AuthService } from '@app/services/auth/auth.service';
-import { TableModule } from '@app/modules/tableModule/table/table.module';
 import { NavModule } from '@app/_modules/nav/nav.module';
 import { UserModule } from '@app/_modules/user/user.module';
 import { OrgModule } from '@app/_modules/org/org.module';
@@ -33,12 +30,7 @@ import { LocationModule } from '@app/_modules/location/location.module';
 
 
 import { AppComponent } from '@app/app.component';
-// import { LoginComponent } from '@app/components/login/login.component';
 import { HomeComponent } from '@app/components/home/home.component';
-import { AdminOrgReportsComponent } from '@app/components/admin-org-reports/admin-org-reports.component';
-import { AdminRadioReportsComponent } from '@app/components/admin-radio-reports/admin-radio-reports.component';
-import { AdminUserReportsComponent } from '@app/components/admin-user-reports/admin-user-reports.component';
-
 
 import { DashboardComponent } from '@app/components/dashboard/dashboard.component';
 import { AdminDashboardComponent } from '@app/components/dashboard/dashboards/admin-dashboard/admin-dashboard.component';
@@ -47,22 +39,17 @@ import { TechDashboardComponent } from '@app/components/dashboard/dashboards/tec
 import { ToastComponent } from '@app/components/toast/toast.component';
 import { AuthEffects } from '@app/_store/_auth-store/auth.effects';
 import { LocationMismatchDialogComponent } from '@app/_components/utilComponents/location-mismatch-dialog/location-mismatch-dialog.component';
-import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        // LoginComponent,
-        AdminOrgReportsComponent,
-        AdminRadioReportsComponent,
-        AdminUserReportsComponent,
         DashboardComponent,
         AdminDashboardComponent,
         UserDashboardComponent,
         TechDashboardComponent,
         LocationMismatchDialogComponent,
-    ],
+        ],
     imports: [
         BrowserModule,
         StoreModule.forRoot({}),
@@ -79,14 +66,11 @@ import { APP_BASE_HREF } from '@angular/common';
         MatAutocompleteModule,
         MatFormFieldModule,
         MatOptionModule,
-        // MatInputModule,
         MatNativeDateModule,
         BrowserAnimationsModule,
-        // MatRadioModule,
-        // MatSelectModule,
+        MatSelectModule,
         MatProgressSpinnerModule,
         NavModule,
-        TableModule,
         UserModule,
         RadioModule,
         OrgModule,
@@ -96,7 +80,7 @@ import { APP_BASE_HREF } from '@angular/common';
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode()})
         
     ],
-    providers: [ AuthService, {provide: APP_BASE_HREF, useValue: '/'}],
+    providers: [ AuthService ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

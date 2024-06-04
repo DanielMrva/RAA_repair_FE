@@ -88,6 +88,8 @@ export class AddOrgComponent implements OnInit, OnDestroy {
 
   onSubmit() {
 
+    console.log(this.orgForm.value);
+
     const orgName = this.orgForm.value.orgName ?? '';
 
     this.store.dispatch(addOrg({ orgName: orgName }));

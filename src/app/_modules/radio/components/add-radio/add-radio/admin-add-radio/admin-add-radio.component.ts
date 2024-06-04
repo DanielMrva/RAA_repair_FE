@@ -52,7 +52,7 @@ export class AdminAddRadioComponent implements OnInit, OnDestroy{
 
 
 
-   adminRadioForm = new FormGroup({
+  adminRadioForm = new FormGroup({
     orgName: new FormControl<string>(''),
     locationName: new FormControl<string>(''),
     datePurchased: new FormControl<string>(''),
@@ -145,6 +145,8 @@ export class AdminAddRadioComponent implements OnInit, OnDestroy{
   };
 
   onSubmit() {
+
+    console.log(this.adminRadioForm.value)
 
     const orgName = this.adminRadioForm.value.orgName ?? '';
     const locationName = this.adminRadioForm.value.locationName ?? '';

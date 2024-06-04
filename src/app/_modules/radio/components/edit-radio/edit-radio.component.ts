@@ -30,7 +30,7 @@ export class EditRadioComponent implements OnInit, OnDestroy {
     this.orgNames$.subscribe((orgList: Organization[] | []) => {
       if (orgList.length > 0) {
         orgOptions = orgList.map(org => org.orgName)
-      } 
+      }
     })
 
     return orgOptions.filter(option => option.toLowerCase().includes(filterValue))
@@ -40,15 +40,15 @@ export class EditRadioComponent implements OnInit, OnDestroy {
   private _filterLocs(locValue: string | null, orgValue: string | null, locations: Location[]): string[] {
     const filteredLocValue = (locValue || '').toLowerCase();
     const filteredOrgValue = (orgValue || '').toLowerCase();
-  
+
     let locOptions: string[] = [];
-  
+
     locations.forEach((loc) => {
       if (loc.locationName.toLowerCase().includes(filteredLocValue) && loc.orgName.toLowerCase() === filteredOrgValue) {
         locOptions.push(loc.locationName);
       }
     });
-  
+
     return locOptions;
   }
 
@@ -73,7 +73,7 @@ export class EditRadioComponent implements OnInit, OnDestroy {
 
   radioID!: string;
 
-      
+
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -82,7 +82,7 @@ export class EditRadioComponent implements OnInit, OnDestroy {
     this.isLoading$ = this.store.select(radioLoadingSelector);
     this.radioError$ = this.store.select(radioErrorSelector);
     this.oneRadio$ = this.store.select(selectOneRadio);
-  
+
     this.orgNames$ = this.store.select(selectOrgNames);
     this.isLoadingOrgNames$ = this.store.select(orgLoadingSelector);
     this.orgNameError$ = this.store.select(orgErrorSelector);
@@ -90,9 +90,9 @@ export class EditRadioComponent implements OnInit, OnDestroy {
     this.locationNames$ = this.store.select(selectLocationNames);
     this.isLoadingLocationNames$ = this.store.select(locationLoadingSelector);
     this.locationNameError$ = this.store.select(locationErrorSelector);
-   }
+  }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
 
     this.store.dispatch(loadOrgNames());
     this.store.dispatch(loadLocationNames())
@@ -137,8 +137,12 @@ export class EditRadioComponent implements OnInit, OnDestroy {
       map(([locName, orgName, locations]) => this._filterLocs(locName, orgName, locations))
     );
 
-      
+
   };
+
+
+
+
 
   editRadioForm = new FormGroup({
     orgName: new FormControl<string>(''),
@@ -157,13 +161,15 @@ export class EditRadioComponent implements OnInit, OnDestroy {
     otherType: new FormControl<string>('')
   });
 
+
+
   get notesArray(): FormArray {
     return this.editRadioForm.get('notes') as FormArray;
   }
 
   loadRadio(id: string): void {
 
-    this.store.dispatch(loadOneRadio({radioID: id}))
+    this.store.dispatch(loadOneRadio({ radioID: id }))
   };
 
   populateForm() {
@@ -182,7 +188,7 @@ export class EditRadioComponent implements OnInit, OnDestroy {
             otherType = radio.radioType;
           }
 
-        this.editRadioForm.patchValue({
+          this.editRadioForm.patchValue({
             orgName: radio.orgName,
             locationName: radio.locationName,
             datePurchased: new Date(parseInt(radio.datePurchased)),
@@ -197,21 +203,21 @@ export class EditRadioComponent implements OnInit, OnDestroy {
             radioType: radioType,
             otherType: otherType
           });
-  
+
           radio.notes.forEach(note => {
             (this.editRadioForm.get('notes') as FormArray).push(this.formBuilder.control(note));
           });
-  
+
         }
       })
-  
+
 
     );
 
   };
 
   addNotes() {
-    this.notesArray.push(new FormControl<string>('', { nonNullable: true}));
+    this.notesArray.push(new FormControl<string>('', { nonNullable: true }));
   };
 
   removeNote(index: number) {
@@ -222,7 +228,7 @@ export class EditRadioComponent implements OnInit, OnDestroy {
 
 
 
-    this.store.dispatch(editRadio({id: this.radioID, updates: updateRadio}))
+    this.store.dispatch(editRadio({ id: this.radioID, updates: updateRadio }))
   };
 
   prepareRadioData(): UpdateRadioFields {
@@ -272,7 +278,7 @@ export class EditRadioComponent implements OnInit, OnDestroy {
 
     this.updateRadio(submittedRadio);
   };
-  
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   };

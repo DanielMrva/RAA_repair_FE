@@ -19,6 +19,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { LocationEffects } from '@app/_store/_location-store/location.effects';
 import { locationReducer } from '@app/_store/_location-store/location.reducers';
+import { LocationResultsTableComponent } from './components/location-results-table/location-results-table.component';
 
 
 
@@ -41,7 +42,8 @@ import { locationReducer } from '@app/_store/_location-store/location.reducers';
   declarations: [
     AddLocationComponent,
     EditLocationComponent,
-    OneLocationComponent
+    OneLocationComponent,
+    LocationResultsTableComponent
   ]
 })
 export class LocationModule { }

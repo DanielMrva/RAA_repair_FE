@@ -35,6 +35,7 @@ export class OneLocationComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.route.params.subscribe((params) => {
         const locationId = params['id'];
+        console.log(locationId)
         this.store.dispatch(loadOneLocation({ locationId }));
       })
     );
