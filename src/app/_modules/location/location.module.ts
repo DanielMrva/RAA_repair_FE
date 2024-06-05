@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 
 import { AddLocationComponent } from './components/add-location/add-location.component';
 import { EditLocationComponent } from './components/edit-location/edit-location.component';
@@ -32,6 +33,7 @@ import { LocationResultsTableComponent } from './components/location-results-tab
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
+    MatTableModule,
     BrowserAnimationsModule,
     MatRadioModule,
     MatSelectModule,
