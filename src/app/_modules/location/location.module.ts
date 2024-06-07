@@ -33,11 +33,11 @@ import { LocationResultsTableComponent } from './components/location-results-tab
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
-    MatTableModule,
     BrowserAnimationsModule,
     MatRadioModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatTableModule,
     StoreModule.forFeature('location', locationReducer),
     EffectsModule.forFeature([LocationEffects])
   ],
