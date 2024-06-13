@@ -251,7 +251,7 @@ export const EDIT_REPAIR = gql`
     }
 `
 
-export const Edit_Radio = gql`
+export const EDIT_RADIO = gql`
     mutation editRadio($id: ID!, $updates: UpdateRadioInput) {
         editRadio(_id: $id, updates: $updates) {
             _id
@@ -423,5 +423,4 @@ export const DELETE_REPAIR = gql`
         }
     }
 `
-
 

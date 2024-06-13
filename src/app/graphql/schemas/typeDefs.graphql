@@ -110,6 +110,7 @@ type Query {
   orgLocations(orgName: String!): [Location]
   locationNames: [Location]
   orgRepairs(orgName: String!): [Repair]
+
 }
 
 type Mutation {
