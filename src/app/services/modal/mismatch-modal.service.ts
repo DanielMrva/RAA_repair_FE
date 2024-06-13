@@ -19,6 +19,7 @@ export class MismatchModalService {
 
     modalRef.result.then((result) => {
       if (result === 'submit' || result === 'Update confirmed') {
+        console.log('MM.finalizeSubmissionCallback()')
 
         finalizeSubmissionCallback();
       }
