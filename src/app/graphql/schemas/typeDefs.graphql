@@ -110,7 +110,6 @@ type Query {
   orgLocations(orgName: String!): [Location]
   locationNames: [Location]
   orgRepairs(orgName: String!): [Repair]
-
 }
 
 type Mutation {
@@ -200,4 +199,6 @@ type Mutation {
   editOrg(_id: ID!, updates: UpdateOrgInput): Organization
 
   editLocation(_id: ID!, updates: UpdateLocationInput): Location
+
+  deleteRepair(_id: ID!): Repair
 }
