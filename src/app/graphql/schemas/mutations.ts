@@ -385,3 +385,43 @@ export const EDIT_LOCATION = gql`
     }
 `
 
+export const DELETE_REPAIR = gql`
+    mutation deleteRepair($id: ID!) {
+        deleteRepair(_id: $id) {
+            _id
+            radioID
+            radioMake
+            radioSerial
+            radioLocation
+            endUserPO
+            raaPO
+            repairTag
+            repairStatus
+            dateRepairAdded
+            dateSentEuRaa
+            dateRecEuRaa
+            dateSentRaaTech
+            dateRecTechRaa
+            dateSentRaaEu
+            techInvNum
+            raaInvNum
+            symptoms
+            testFreq
+            incRxSens
+            incFreqErr
+            incMod
+            incPowerOut
+            outRxSens
+            outFreqErr
+            outMod
+            outPowerOut
+            accessories
+            workPerformed
+            repHours
+            partsUsed
+            remarks
+        }
+    }
+`
+
+
