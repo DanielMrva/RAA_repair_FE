@@ -32,6 +32,7 @@ export class EditUserComponent implements OnInit {
   loadUser(id: string): void {
     this.userService.querySingleUser(id)
     .subscribe(( { data }) => {
+      console.log(data)
       this.user = data.user;
       this.populateForm();
       this.loadingUser = false;
@@ -41,6 +42,7 @@ export class EditUserComponent implements OnInit {
   loadOrgNames(): void {
     this.orgService.orgNames()
     .subscribe(( { data }) => {
+      console.log(data.orgNames)
       this.orgList = data.orgNames;
       this.loadingOrgs = false;
     })

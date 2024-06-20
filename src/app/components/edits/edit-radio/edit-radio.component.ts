@@ -31,6 +31,7 @@ export class EditRadioComponent implements OnInit {
   loadRadio(id: string): void {
     this.radioService.querySingleRadio(id).valueChanges
     .subscribe(( { data }) => {
+      console.log(data)
       this.radio = data.radio;
       this.populateForm();
     })
