@@ -23,7 +23,9 @@ export const loadLocationByName = createAction(
 
 export const loadLocationByNameSuccess = createAction(
     '[Location Service] Load Location By Name Successs',
+
     props<{ oneLocation: Location }>()
+
 );
 
 export const loadLocationByNameFailure = createAction(
