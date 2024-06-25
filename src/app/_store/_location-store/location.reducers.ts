@@ -45,21 +45,21 @@ export const locationReducer = createReducer(
 
     on(LocationActions.loadLocationByName, (state) => ({
         ...state,
-        oneLocation: null,
+        locations: [],
         isLoading: true,
         error: null,
     })),
 
-    on(LocationActions.loadLocationByNameSuccess, (state, action ) => ({
+    on(LocationActions.loadLocationByNameSuccess, (state, { oneLocation } ) => ({
         ...state,
-        oneLocation: action.location,
+        oneLocation: oneLocation,
         isLoading: false,
         error: null,
     })),
 
     on(LocationActions.loadLocationByNameFailure, (state, action) => ({
         ...state,
-        oneLocation: null,
+        locations: [],
         isLoading: false,
         error: action.error
     })),
