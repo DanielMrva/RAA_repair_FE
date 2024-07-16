@@ -1,4 +1,4 @@
-import { Component,  OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/_store/app.state';
 import { radioLoadingSelector, radioErrorSelector, selectAllRadios } from '@app/_store/_radio-store/radio.selectors';
@@ -12,7 +12,7 @@ import { loadAllRadios, loadLikeOrgRadios, loadLikeSerialRadio } from '@app/_sto
   styleUrls: ['./radio-results-page.component.css']
 })
 export class RadioResultsPageComponent implements OnDestroy, OnInit {
-  
+
   private subscriptions = new Subscription();
 
   radioError$ = this.store.select(radioErrorSelector);
@@ -42,8 +42,9 @@ export class RadioResultsPageComponent implements OnDestroy, OnInit {
     );
   };
 
+
   ngOnDestroy(): void {
-      this.subscriptions.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
 
