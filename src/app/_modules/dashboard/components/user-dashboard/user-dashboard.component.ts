@@ -36,9 +36,6 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // const userOrgName$ = this.store.select(selectOrgName);
-    // const userLocation$ = this.store.select(selectUserLocation);
-
     this.subscriptions.add(
       combineLatest([this.userOrgName$, this.userLocation$]).subscribe(([orgName, locationName]) => {
         if (orgName && locationName) {
