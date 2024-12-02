@@ -43,7 +43,7 @@ export class RepairEffects {
     loadOrgRepairs$ = createEffect(() =>
         this.actions$.pipe(
             ofType(RepairActions.loadOrgRepairs),
-            switchMap(({ orgName }) => 
+            switchMap(({ orgName }) =>
                 from(this.repairService.orgRepairs(orgName)).pipe(
                     map(({ data }) => RepairActions.loadOrgRepairsSuccess({ repairs: data.orgRepairs })),
 
@@ -55,25 +55,25 @@ export class RepairEffects {
 
     loadOrgLocRepairs$ = createEffect(() =>
         this.actions$.pipe(
-          ofType(RepairActions.loadOrgLocRepairs),
-          mergeMap(({ orgName, locationName }) => {
-            console.log(`Loading repairs for org: ${orgName}, location: ${locationName}`);
-            return from(this.repairService.orgLocRepairs(orgName, locationName)).pipe(
-              map((response) => {
-                console.log('GraphQL Response:', response);
-                return RepairActions.loadOrgLocRepairsSuccess({
-                  repairs: response.data?.orgLocRepairs ?? []
-                });
-              }),
-              catchError((error) => {
-                console.error('Error loading repairs:', error);
-                return of(RepairActions.loadOrgLocRepairsFailure({ error }));
-              })
-            );
-          })
+            ofType(RepairActions.loadOrgLocRepairs),
+            mergeMap(({ orgName, locationName }) => {
+                console.log(`Loading repairs for org: ${orgName}, location: ${locationName}`);
+                return from(this.repairService.orgLocRepairs(orgName, locationName)).pipe(
+                    map((response) => {
+                        console.log('GraphQL Response:', response);
+                        return RepairActions.loadOrgLocRepairsSuccess({
+                            repairs: response.data?.orgLocRepairs ?? []
+                        });
+                    }),
+                    catchError((error) => {
+                        console.error('Error loading repairs:', error);
+                        return of(RepairActions.loadOrgLocRepairsFailure({ error }));
+                    })
+                );
+            })
         )
-      );
-      
+    );
+
 
     loadAllRepairs$ = createEffect(() =>
         this.actions$.pipe(
