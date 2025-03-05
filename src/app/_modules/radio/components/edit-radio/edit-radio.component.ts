@@ -112,6 +112,9 @@ export class EditRadioComponent implements OnInit, OnDestroy {
       this.oneRadio$.subscribe((radio: Radio | null) => {
         if (radio) {
 
+          this.initialLocName = radio.locationName;
+          this.initialOrgName = radio.orgName;
+
           const predefinedTypes = ['mobile', 'handheld', 'base station', 'other'];
           let radioType = radio.radioType;
           let otherType = '';
