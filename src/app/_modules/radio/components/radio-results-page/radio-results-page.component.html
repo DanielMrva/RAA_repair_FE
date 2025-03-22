@@ -12,6 +12,9 @@
 <ng-template #loadedData>
 
     <div *ngIf="radios$ | async as radios">
+
+        <app-backup-doctype-button docType="radio" [documents]="radios" *appAccessLevel="'admin'"></app-backup-doctype-button>
+        
         <app-radio-results-table [radios]="radios"></app-radio-results-table>
     </div>
 

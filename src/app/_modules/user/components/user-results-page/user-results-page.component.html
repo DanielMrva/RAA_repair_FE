@@ -12,6 +12,9 @@
 <ng-template #loadedData>
 
     <div *ngIf="users$ | async as users">
+
+        <app-backup-doctype-button docType="user" [documents]="users" *appAccessLevel="'admin'"></app-backup-doctype-button>
+        
         <app-user-results-table [users]="users"></app-user-results-table>
     </div>
 
