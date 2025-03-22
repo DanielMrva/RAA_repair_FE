@@ -11,10 +11,13 @@
 
 <ng-template #loadedData>
 
+
+
     <div *ngIf="orgs$ | async as orgs">
+
+        <app-backup-doctype-button docType="organization" [documents]="orgs" *appAccessLevel="'admin'"></app-backup-doctype-button>
+
         <app-org-results-table [organizations]="orgs"></app-org-results-table>
     </div>
 
 </ng-template>
-
-

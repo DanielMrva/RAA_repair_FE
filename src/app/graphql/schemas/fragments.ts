@@ -141,3 +141,24 @@ export const TAG_FIELDS_FRAGMENT = gql`
         tagName
     }
 `
+export const BACKUP_ORG_FIELDS_FRAGMENT = gql`
+fragment BackupOrgFieldsFragment on Organization {
+    _id
+    orgName
+    tags {
+      _id
+      tagName
+    }
+    locations {
+      _id
+      locationName
+      radios {
+        _id
+      }
+    }
+    users {
+      _id
+      username
+    }
+  }
+`

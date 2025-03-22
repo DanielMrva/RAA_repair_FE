@@ -45,6 +45,7 @@ import { OrgSearchComponent } from './components/org-search/org-search.component
 import { AddTagModalFormComponent } from './components/tags/add-tag-modal-form/add-tag-modal-form.component';
 import { MutateTagFormComponent } from './components/tags/mutate-tag-form/mutate-tag-form.component';
 import { MutateTagModalComponent } from './components/tags/mutate-tag-modal/mutate-tag-modal.component';
+import { BackupDoctypeButtonComponent } from './components/backup-doctype-button/backup-doctype-button.component';
 
 
 
@@ -76,7 +77,8 @@ import { MutateTagModalComponent } from './components/tags/mutate-tag-modal/muta
     OrgSearchComponent,
     AddTagModalFormComponent,
     MutateTagFormComponent,
-    MutateTagModalComponent
+    MutateTagModalComponent,
+    BackupDoctypeButtonComponent
   ],
   imports: [
     CommonModule,
@@ -120,7 +122,8 @@ import { MutateTagModalComponent } from './components/tags/mutate-tag-modal/muta
     TagSelectorComponent,
     OrgTagsBadgeComponent,
     OrgSearchComponent,
-    MutateTagFormComponent
+    MutateTagFormComponent,
+    BackupDoctypeButtonComponent
   ]
 })
 export class UtilityModule { }

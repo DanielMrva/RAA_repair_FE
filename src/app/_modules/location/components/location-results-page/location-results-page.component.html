@@ -11,6 +11,9 @@
 <ng-template #loadedData>
 
     <div *ngIf="locations$ | async as locations">
+        
+        <app-backup-doctype-button docType="location" [documents]="locations" *appAccessLevel="'admin'"></app-backup-doctype-button>
+        
         <app-location-results-table [locations]="locations"></app-location-results-table>
     </div>
 

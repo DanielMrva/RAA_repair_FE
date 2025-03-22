@@ -12,6 +12,9 @@
 <ng-template #loadedData>
 
     <div *ngIf="repairs$ | async as repairs">
+
+        <app-backup-doctype-button docType="repair" [documents]="repairs" *appAccessLevel="'admin'"></app-backup-doctype-button>
+
         <app-repair-results-table [repairs]="repairs"></app-repair-results-table>
     </div>
 
