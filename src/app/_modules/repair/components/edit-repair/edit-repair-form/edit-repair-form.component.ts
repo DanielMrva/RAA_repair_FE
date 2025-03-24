@@ -134,11 +134,7 @@ export class EditRepairFormComponent implements OnDestroy, OnInit {
                 this.repairID = repair._id;
                 this.radioId = radio._id;
                 this.populateForm(repair, radio);
-                this.initialOrgName = repair.radioOrg;
-                this.initialLocationName = repair.radioLocation;
 
-                console.log(this.initialLocationName)
-                console.log(this.initialOrgName)
 
               }
             })
@@ -219,6 +215,9 @@ export class EditRepairFormComponent implements OnDestroy, OnInit {
       repHours: repair.repHours,
       remarks: repair.remarks,
     });
+
+    this.initialOrgName = repair.radioOrg;
+    this.initialLocationName = repair.radioLocation;
 
     const resetFormArray = (formArrayName: string, items: string[]) => {
       const formArray = this.repairForm.get(formArrayName) as FormArray;

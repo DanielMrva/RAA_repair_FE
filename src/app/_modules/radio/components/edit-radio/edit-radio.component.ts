@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
-import { Organization, Radio, UpdateRadioFields, Location } from '@app/graphql/schemas/typeInterfaces';
+import { Radio, UpdateRadioFields } from '@app/graphql/schemas/typeInterfaces';
 import { AppState } from '@app/_store/app.state';
 import { Store } from '@ngrx/store';
 import { editRadio, loadOneRadio } from '@app/_store/_radio-store/radio.actions';
 import { selectOneRadio, radioErrorSelector, radioLoadingSelector } from '@app/_store/_radio-store/radio.selectors';
-import { Observable, Subscription, combineLatest } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { selectLocationNames, locationErrorSelector, locNamesLoadingSelector } from '@app/_store/_location-store/location.selectors';
 import { selectOrgNames, orgErrorSelector, orgNamesLoadingSelector } from '@app/_store/_org-store/org.selectors';
 import { loadLocationNames } from '@app/_store/_location-store/location.actions';
@@ -136,6 +135,9 @@ export class EditRadioComponent implements OnInit, OnDestroy {
             radioType: radioType,
             otherType: otherType
           });
+
+          this.initialLocName = radio.locationName;
+          this.initialOrgName = radio.orgName;
 
           radio.notes.forEach(note => {
             (this.editRadioForm.get('notes') as FormArray).push(this.formBuilder.control(note));
