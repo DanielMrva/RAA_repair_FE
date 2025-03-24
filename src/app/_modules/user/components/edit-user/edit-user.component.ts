@@ -96,6 +96,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
             userLocation: user.userLocation,
             accessLevel: user.accessLevel
           });
+          this.initialLocName = user.userLocation;
+          this.initialOrgName = user.orgName;
         }
       })
     );
