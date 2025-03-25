@@ -3,7 +3,7 @@
     <button class="btn btn-secondary flex-grow-1 mx-1" (click)="copyDocumentsToClipboard()" [disabled]="!documents">
         Copy {{documents.length}} {{ docType.charAt(0).toUpperCase()}}{{docType.slice(1)}} Documents
     </button>
-    <button class="btn btn-primary flex-grow-1 mx-1" (click)="copyDocumentsToClipboard()" [disabled]="!documents">
+    <button class="btn btn-primary flex-grow-1 mx-1" (click)="downloadBackup()" [disabled]="!documents">
         Download {{documents.length}} {{ docType.charAt(0).toUpperCase()}}{{docType.slice(1)}} Documents
     </button>
 
